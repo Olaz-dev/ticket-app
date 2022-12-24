@@ -28,16 +28,16 @@ Route::post('/login',[LoginController::class,"authenticate"]);
 
 Route::group(['middleware'=>['auth','isAdmin']], function(){
 Route::get('dashboard', [HomeController::class,'index']);
+Route::resource('ticket',TicketController::class);
 });
 
 Route::group(['middleware'=>['auth','isAgent']], function(){
-//Route::get('/ticket',[TicketController::class,'ticket']);
 
 });
-//Route::get('/ticket/{type}',[TicketController::class,'ticket'])->middleware('auth');
+Route::group(['middleware'=>['auth']], function(){
 
-// Route::get('/ticket',[TicketController::class,'ticket']);
-// Route::post('/ticket/{type}',[TicketController::class,'ticket']);
+Route::resource('ticket',TicketController::class)->only(['create','store']);
+});
 
 Route::get('/signup',[SignupController::class,'index'])->middleware('auth');
 Route::post('/signup',[SignupController::class,'save']);
@@ -46,4 +46,5 @@ Route::post('/signup',[SignupController::class,'save']);
 Route::resource('category',CategoryController::class);
 Route::resource('label',LabelController::class);
 Route::resource('priority', PriorityController::class);
-Route::resource('ticket',TicketController::class);
+
+//Route::resource('ticket',TicketController::class)->only(['create','store']);

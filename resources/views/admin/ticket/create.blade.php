@@ -59,6 +59,7 @@
                             @foreach ($categories  as $category )
                                 <input type="checkbox" value="{{$category->category_name }}" name="categories" class="checkoption" {{ old('categories') == "$category->category_name" ? 'checked' : '' }} >
                                 <label for="javascript">{{ $category->category_name }}</label>  
+                                
                             @endforeach
                                  @error('categories')
                                     <span class="alert-danger">{{ $message }}</span>
@@ -71,7 +72,7 @@
                             <label class="form-label">Priority<span class="text-danger">*</span></label>
                             <div class="form-icon position-relative">
                                 <select name="priority" id=""  class="form-control ps-4"> 
-                                    <option  value="" class="form-control ps-4">Select Priority</option>
+                                    <option   class="form-control ps-4">Select Priority</option>
                                     @foreach ($priorities as $priority )
                                          <option value="{{ $priority->priority_name }}" class="form-control ps-4">{{ $priority->priority_name }}</option>
                                     @endforeach
@@ -83,6 +84,7 @@
                          @enderror                                                                             
                     </div><!--end col-->
                 </div><!--end row-->
+                <input type="hidden" name="user_id" value="{{ auth()->user()->id; }}">
                 <div class="row">
                     <div class="col-sm-12">
                         <input type="submit" id="submit" name="send" class="btn btn-primary" value="Submit Ticket">

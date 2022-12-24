@@ -16,7 +16,7 @@ class TicketController extends Controller
     public function index()
     {
         $tickets = Ticket::all();
-        return view ('admin.ticket.index');
+        return view ('admin.ticket.index',compact('tickets'));
         
     }
     public function create()
@@ -29,8 +29,13 @@ class TicketController extends Controller
 
     public function store(CreateTicketRequest $request)
     {
+    $olaz =   $request->input('user_id');
+    $ticket = Ticket::Create($request->validated());
+    $ticket->getUser()->attach($olaz);
+  
     
-     Ticket::Create($request->validated());
+     
+    return redirect()->route('mytickets');
     }
 
     public function edit(Ticket $ticket)
@@ -44,10 +49,11 @@ class TicketController extends Controller
        return redirect()->route('ticket.index');
     }
 
-    public function __construct()
-    {
-        $this->middleware(['auth','isAdmin'])->except(['create']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware(['auth','isAdmin'])->except(['create','store']);
+    //     $this->middleware('auth')->only('create','store');
+    // }
 
 
     
