@@ -60,65 +60,29 @@
                                     <div class="dropdown-menu dd-menu bg-white shadow rounded border-0 mt-3 p-0" data-simplebar style="height: 320px; width: 290px;">
                                         <div class="d-flex align-items-center justify-content-between p-3 border-bottom">
                                             <h6 class="mb-0 text-dark">Notifications</h6>
+                                           
                                             <span class="badge bg-soft-danger rounded-pill">3</span>
                                         </div>
-                                        <div class="p-3">
+                                        @forelse ( $user->notifications as $notification )
+                                            <div class="p-3">
                                             <a href="#!" class="dropdown-item features feature-primary key-feature p-0">
                                                 <div class="d-flex align-items-center">
                                                     <div class="icon text-center rounded-circle me-2">
                                                         <i class="ti ti-shopping-cart"></i>
                                                     </div>
                                                     <div class="flex-1">
-                                                        <h6 class="mb-0 text-dark title">Order Complete</h6>
+                                                        <h6 class="mb-0 text-dark title">{{ $notification->data['ticket_title'] }}</h6>
                                                         <small class="text-muted">15 min ago</small>
                                                     </div>
                                                 </div>
                                             </a>
                                             
-                                            <a href="#!" class="dropdown-item features feature-primary key-feature p-0 mt-3">
-                                                <div class="d-flex align-items-center">
-                                                    <img src="{{url('assets/images/client/04.jpg')}}" class="avatar avatar-md-sm rounded-circle border shadow me-2" alt="">
-                                                    <div class="flex-1">
-                                                        <h6 class="mb-0 text-dark title"><span class="fw-bold">Message</span> from Luis</h6>
-                                                        <small class="text-muted">1 hour ago</small>
-                                                    </div>
-                                                </div>
-                                            </a>
                                             
-                                            <a href="#!" class="dropdown-item features feature-primary key-feature p-0 mt-3">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="icon text-center rounded-circle me-2">
-                                                        <i class="ti ti-currency-dollar"></i>
-                                                    </div>
-                                                    <div class="flex-1">
-                                                        <h6 class="mb-0 text-dark title"><span class="fw-bold">One Refund Request</span></h6>
-                                                        <small class="text-muted">2 hour ago</small>
-                                                    </div>
-                                                </div>
-                                            </a>
-
-                                            <a href="#!" class="dropdown-item features feature-primary key-feature p-0 mt-3">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="icon text-center rounded-circle me-2">
-                                                        <i class="ti ti-truck-delivery"></i>
-                                                    </div>
-                                                    <div class="flex-1">
-                                                        <h6 class="mb-0 text-dark title">Deliverd your Order</h6>
-                                                        <small class="text-muted">Yesterday</small>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            
-                                            <a href="#!" class="dropdown-item features feature-primary key-feature p-0 mt-3">
-                                                <div class="d-flex align-items-center">
-                                                    <img src="{{url('assets/images/client/15.jpg')}}" class="avatar avatar-md-sm rounded-circle border shadow me-2" alt="">
-                                                    <div class="flex-1">
-                                                        <h6 class="mb-0 text-dark title"><span class="fw-bold">Cally</span> started following you</h6>
-                                                        <small class="text-muted">2 days ago</small>
-                                                    </div>
-                                                </div>
-                                            </a>
                                         </div>
+                                        @empty
+                                            
+                                        @endforelse
+                                        
                                     </div>
                                 </div>
                             </li>

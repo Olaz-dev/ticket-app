@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Notification;
 use App\Models\User;
 use App\Models\Label;
 use App\Models\Ticket;
@@ -10,6 +10,9 @@ use App\Models\Priority;
 use Illuminate\Http\Request;
 use App\Http\Requests\EditTicketRequest;
 use App\Http\Requests\CreateTicketRequest;
+use App\Notifications\TicketNotification;
+
+//use Illuminate\Notifications\Notification;
 
 class TicketController extends Controller
 {
@@ -25,14 +28,18 @@ class TicketController extends Controller
         $categories = Category::all();
         $priorities = Priority::all();
         return  view('admin.ticket.create',compact('labels','categories','priorities'));
+        
     }
 
     public function store(CreateTicketRequest $request)
     {
+    $user = User::all();
     $olaz =   $request->input('user_id');
     $ticket = Ticket::Create($request->validated());
+    Notification::send($user, new TicketNotification($request->title));
     $ticket->getUser()->attach($olaz);
     return redirect()->route('mytickets');
+    
     }
 
     public function edit(Ticket $ticket)
