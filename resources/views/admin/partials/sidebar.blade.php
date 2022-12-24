@@ -16,7 +16,7 @@
                             <a href="javascript:void(0)"><i class="ti ti-browser me-2"></i>Tickets</a>
                             <div class="sidebar-submenu">
                                 <ul>
-                                    <li><a href="{{ url('tickets') }}">All Tickets</a></li>
+                                    <li><a href="{{ url('ticket') }}">All Tickets</a></li>
                                     <li><a href="index-sidebar-light.html">Assigned Tickets</a></li>
                                     <li><a href="index-rtl.html">Opened Tickets</a></li>
                                     <li><a href="index-rtl-dark.html">Closed Tickets</a></li>

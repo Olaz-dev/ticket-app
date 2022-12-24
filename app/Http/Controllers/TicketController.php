@@ -32,9 +32,6 @@ class TicketController extends Controller
     $olaz =   $request->input('user_id');
     $ticket = Ticket::Create($request->validated());
     $ticket->getUser()->attach($olaz);
-  
-    
-     
     return redirect()->route('mytickets');
     }
 
@@ -49,6 +46,10 @@ class TicketController extends Controller
        return redirect()->route('ticket.index');
     }
 
+    // public function show()
+    // {
+        
+    // }
     // public function __construct()
     // {
     //     $this->middleware(['auth','isAdmin'])->except(['create','store']);

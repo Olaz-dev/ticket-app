@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PriorityController;
 
 /*
@@ -25,6 +26,7 @@ Route::get('/', function () {
 });
 Route::get('/login',[LoginController::class,'index'])->name('login');
 Route::post('/login',[LoginController::class,"authenticate"]);
+Route::get('logout',[LogoutController::class,"index"]);
 
 Route::group(['middleware'=>['auth','isAdmin']], function(){
 Route::get('dashboard', [HomeController::class,'index']);
