@@ -31,7 +31,7 @@ class TicketNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database', 'broadcast'];
+        return ['database'];
     }
 
     /**
@@ -57,8 +57,12 @@ class TicketNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            "type" => "ticket_created",
+            "type" => "Ticket Submitted",
             "ticket_title" =>$this->ticket->title,
         ];
     }
+    // public function markAsRead()
+    // {
+        
+    // }
 }

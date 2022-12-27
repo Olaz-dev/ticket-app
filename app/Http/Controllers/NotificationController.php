@@ -2,16 +2,28 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Notifications\TicketNotification;
 
 class NotificationController extends Controller
 {
-    public function notification()
+    public function index()
     {
-        $user = Auth::User();
-        return view('admin.partials.notification',compact('user'));
+        $notifications = auth()->user()->unreadNotifications;
+        return view('admin.notification.index',compact('notifications'));
+    }
+
+    public function update(Request $request, TicketNotification $notification)
+    {
+        auth()->user()->unreadNotifications->markAsRead();
+
+        return redirect()->route('notifications.index');
+    }
+
+    public function destroy()
+    {
+        auth()->user()->unreadNotifications->markAsRead();
+
+        return redirect()->route('notifications.index');
     }
 }

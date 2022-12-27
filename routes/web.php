@@ -9,6 +9,7 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PriorityController;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +32,8 @@ Route::get('logout',[LogoutController::class,"index"]);
 Route::group(['middleware'=>['auth','isAdmin']], function(){
 Route::get('dashboard', [HomeController::class,'index']);
 Route::resource('ticket',TicketController::class);
-});
+ Route::resource('user', UsersController::class);
+ });
 
 Route::group(['middleware'=>['auth','isAgent']], function(){
 
@@ -44,6 +46,12 @@ Route::resource('ticket',TicketController::class)->only(['create','store']);
 Route::get('/signup',[SignupController::class,'index'])->middleware('auth');
 Route::post('/signup',[SignupController::class,'save']);
 
+
+Route::group(['prefix' => 'notifications', 'as' => 'notifications.','middleware'=>['auth','isAdmin']], function () {
+        Route::get('/', [\App\Http\Controllers\NotificationController::class, 'index'])->name('index');
+        Route::put('/{notification}', [\App\Http\Controllers\NotificationController::class, 'update'])->name('update');
+        Route::delete('/destroy', [\App\Http\Controllers\NotificationController::class, 'destroy'])->name('destroy');
+    });
 
 Route::resource('category',CategoryController::class);
 Route::resource('label',LabelController::class);

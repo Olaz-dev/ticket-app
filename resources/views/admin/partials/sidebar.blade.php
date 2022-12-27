@@ -1,7 +1,7 @@
 <nav id="sidebar" class="sidebar-wrapper sidebar-dark">
                 <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
                     <div class="sidebar-brand">
-                        <a href="index.html">
+                        <a href="{{ URL('dashboard')  }}">
                             <img src="{{url('assets/images/logo-dark.png')}}" height="24" class="logo-light-mode" alt="">
                             <img src="{{url('assets/images/logo-light.png')}}" height="24" class="logo-dark-mode" alt="">
                             <span class="sidebar-colored">
@@ -22,6 +22,20 @@
                                     <li><a href="index-rtl-dark.html">Closed Tickets</a></li>
                                 </ul>
                             </div>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="javascript:void(0)"><i class="ti ti-browser me-2"></i>Users</a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li><a href="{{ url('user') }}">All user</a></li>
+                                    <li><a href="index-sidebar-light.html">Assigned Tickets</a></li>
+                                    <li><a href="index-rtl.html">Opened Tickets</a></li>
+                                    <li><a href="index-rtl-dark.html">Closed Tickets</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="sidebar-dropdown">
+                            <a href="{{ url('notifications') }}"><i class="ti ti-browser me-2"></i>Tickets Logs</a>
                         </li>
                         <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="ti ti-apps me-2"></i>Categories</a>
