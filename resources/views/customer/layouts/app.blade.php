@@ -1,4 +1,4 @@
-@include('customer.partials.header');
+@include('customer.partials.header')
 
     <body>
         <!-- Loader -->
@@ -14,7 +14,7 @@
 
         <div class="page-wrapper landrick-theme toggled">
             <nav id="sidebar" class="sidebar-wrapper sidebar-dark">
-                <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
+                <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px)">
                     <div class="sidebar-brand">
                         <a href="index.html">
                             <img src="{{url('assets/images/logo-dark.png')}}" height="24" class="logo-light-mode" alt="">

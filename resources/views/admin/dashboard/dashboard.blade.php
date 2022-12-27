@@ -1,5 +1,6 @@
-@extends('admin.layouts.app');
-@section('content')       
+@extends('admin.layouts.app')
+@section('content')
+               
                 <div class="container-fluid">
                     <div class="layout-specing">
                         <div class="d-flex align-items-center justify-content-between">

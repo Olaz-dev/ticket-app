@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Notifications;
-
+use App\Models\Ticket;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -15,10 +15,12 @@ class TicketNotification extends Notification
      * Create a new notification instance.
      *
      * @return void
+     * 
      */
-    public function __construct($title)
+    public $ticket;
+    public function __construct(Ticket $ticket)
     {
-        $this->title = $title;
+        $this->ticket = $ticket;
     }
 
     /**
@@ -29,7 +31,7 @@ class TicketNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', 'broadcast'];
     }
 
     /**
@@ -55,7 +57,8 @@ class TicketNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            "ticket_title" =>$this->title
+            "type" => "ticket_created",
+            "ticket_title" =>$this->ticket->title,
         ];
     }
 }
