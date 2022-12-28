@@ -26,4 +26,9 @@ class Ticket extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function assignedAgent()
+    {
+        return $this->hasOne(User::class,'role_as')->select('1');
+    }
 }

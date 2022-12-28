@@ -24,9 +24,7 @@ class EditUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'firstname'=>['required','string','max:255'],
-            'lastname'=>['required','string','max:255'],
-            'role'=>['required']
+            'role_as'=>['required']
         ];
     }
 }

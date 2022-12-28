@@ -38,6 +38,7 @@ class TicketController extends Controller
     $user = User::where('role_as', '1')->get();
     $olaz =   $request->input('user_id');
     $ticket = Ticket::Create($request->validated());
+    //notify's Users with Admin=1 role
     Notification::send($user, new TicketNotification($ticket));
     $ticket->getUser()->attach($olaz);
     return redirect()->route('mytickets');
