@@ -27,16 +27,17 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label class="form-label">Role<span class="text-danger">*</span></label>
+                            @if ($user->role_as === 1) {{ "Admin" }} @elseif($user->role_as === 2){{"Agent"}}@else{{"User"}} @endif  
                             <div class="form-icon position-relative">
-                                <select name="Role" id=""  class="form-control ps-4"> 
+                                <select name="role" id=""  class="form-control ps-4"> 
                                     <option   class="form-control ps-4">Select Role</option>
-                                         <option value="0" class="form-control ps-4">Admin</option>
-                                         <option value="1" class="form-control ps-4">Agent</option>
-                                         <option value="2" class="form-control ps-4">User</option>
+                                         <option value=""@if ($user->role_as === 1){{ 'disabled' }}@endif  class="form-control ps-4">Admin</option>
+                                         <option value="1" @if ($user->role_as === 2){{ 'disabled' }}@endif  class="form-control ps-4">Agent</option>
+                                         <option value="2" @if ($user->role_as === 0){{ 'disabled' }}@endif class="form-control ps-4">User</option>
                                 </select>
                             </div>
                         </div>  
-                        @error('priority')
+                        @error('role')
                            <span class="alert-danger">{{ $message }}</span>
                          @enderror                                                                             
                     </div><!--end col-->

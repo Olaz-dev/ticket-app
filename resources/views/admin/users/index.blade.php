@@ -61,7 +61,7 @@
                                                 <td class="text-center p-3">{{ $user->created_at->diffForHumans() }}</td>
                                                 <td class="text-end p-3">
                                                     <a href="{{ url("user/$user->id")}}" class="btn btn-sm btn-primary">Details</a>
-                                                    <a href="#" class="btn btn-sm btn-soft-primary ms-2">Edit</a>
+                                                    <a href="{{ url("user/$user->id/edit") }}" class="btn btn-sm btn-soft-primary ms-2">Edit</a>
                                                 </td>
                                             </tr>
                                             @endforeach
