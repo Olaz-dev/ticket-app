@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignedTicketController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LabelController;
@@ -33,6 +34,7 @@ Route::group(['middleware'=>['auth','isAdmin']], function(){
 Route::get('dashboard', [HomeController::class,'index']);
 Route::resource('ticket',TicketController::class);
  Route::resource('user', UsersController::class);
+ Route::resource('assigned',AssignedTicketController::class);
  });
 
 Route::group(['middleware'=>['auth','isAgent']], function(){

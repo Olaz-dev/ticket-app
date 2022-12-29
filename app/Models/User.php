@@ -48,7 +48,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Ticket::class);
     }
-
+//this is for the ticketAssigned table
     public function ticketAssigned()
     {
         return $this->hasMany(Ticket::class);

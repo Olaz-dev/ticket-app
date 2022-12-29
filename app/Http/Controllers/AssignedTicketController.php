@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 
 class AssignedTicketController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        return view('admin.assignTicket.index');
+        $ticket = Ticket::find($id);
+        return view('admin.assignTicket.index',compact('ticket'));
     }
+
+    
 }

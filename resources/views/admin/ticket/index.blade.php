@@ -66,8 +66,8 @@
                                                     
                                                 </td>
                                                 <td class="text-end p-3">
-                                                    <a href="{{ url("tickets/$ticket->id")}}" class="btn btn-sm btn-primary">Preview</a>
-                                                    <a href="#" class="btn btn-sm btn-soft-primary ms-2">Print</a>
+                                                    <a href="{{ url("ticket/$ticket->id")}}" class="btn btn-sm btn-primary">Preview</a>
+                                                    <a href="{{ url("ticket/$ticket->id")}}" class="btn btn-sm btn-soft-primary ms-2">Assign</a>
                                                 </td>
                                             </tr>
                                             @endforeach

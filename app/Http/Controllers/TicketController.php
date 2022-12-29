@@ -52,14 +52,20 @@ class TicketController extends Controller
 
     public function update(EditTicketRequest $request, Ticket $ticket)
     {
-       $ticket->Update($request->validated());
+       //$ticket->Update($request->validated());
+       $agent_id = $request->input('agent');
+       $ticket->assignedAgent()->attach($agent_id);
        return redirect()->route('ticket.index');
     }
 
-    // public function show()
-    // {
-        
-    // }
+  public function show(Ticket $ticket)
+    {
+        $ticket = Ticket::find($ticket->id);
+        $user = User::where('role_as',"2")->get();
+        return view('admin.ticket.show',compact('ticket','user'));
+    }
+
+  
     // public function __construct()
     // {
     //     $this->middleware(['auth','isAdmin'])->except(['create','store']);
