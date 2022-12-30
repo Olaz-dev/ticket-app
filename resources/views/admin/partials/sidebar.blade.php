@@ -12,6 +12,7 @@
                     
                     <ul class="sidebar-menu">
                         <li><a href="{{ URL('dashboard')  }}"><i class="ti ti-home me-2"></i>Dashboard</a></li>
+                        @if (Auth::user()->role_as === '1')
                         <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="ti ti-browser me-2"></i>Tickets</a>
                             <div class="sidebar-submenu">
@@ -23,6 +24,10 @@
                                 </ul>
                             </div>
                         </li>
+                        @else
+                        <li><a href="{{ URL("ticketsassigned")  }}"><i class="ti ti-home me-2"></i>Tickets Assigned</a></li>
+                        @endif
+                        @if (Auth::user()->role_as === '1')
                         <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="ti ti-browser me-2"></i>Users</a>
                             <div class="sidebar-submenu">
@@ -34,9 +39,11 @@
                                 </ul>
                             </div>
                         </li>
+                        @endif
                         <li class="sidebar-dropdown">
                             <a href="{{ url('notifications') }}"><i class="ti ti-browser me-2"></i>Tickets Logs</a>
                         </li>
+                         @if (Auth::user()->role_as === '1')
                         <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="ti ti-apps me-2"></i>Categories</a>
                             <div class="sidebar-submenu">
@@ -67,6 +74,7 @@
                                 </ul>
                             </div>
                         </li>
+                        @endif
                         <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="ti ti-user me-2"></i>User Profile</a>
                             <div class="sidebar-submenu">

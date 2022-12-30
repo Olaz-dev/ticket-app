@@ -54,6 +54,11 @@ Route::group(['prefix' => 'notifications', 'as' => 'notifications.','middleware'
         Route::put('/{notification}', [\App\Http\Controllers\NotificationController::class, 'update'])->name('update');
         Route::delete('/destroy', [\App\Http\Controllers\NotificationController::class, 'destroy'])->name('destroy');
     });
+Route::group(['prefix' => 'notifications', 'as' => 'notifications.','middleware'=>['auth','isAgent']], function () {
+        Route::get('/', [\App\Http\Controllers\AgentNotificationController::class, 'index'])->name('index');
+        Route::put('/{notification}', [\App\Http\Controllers\AgentNotificationController::class, 'update'])->name('update');
+        Route::delete('/destroy', [\App\Http\Controllers\AgentNotificationController::class, 'destroy'])->name('destroy');
+    });
 
 Route::resource('category',CategoryController::class);
 Route::resource('label',LabelController::class);

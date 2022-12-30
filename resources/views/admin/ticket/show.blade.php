@@ -37,26 +37,35 @@
                                                     </div>
                                                 </div>
                                             </div><!--end col-->
-
+                                                  <input type="text" name="status" value="Processing" hidden>
                                              <div class="col-lg-12">
                                             <div class="mb-3">
-                                                <label class="form-label">Agent Available<span class="text-danger">*</span></label>
-                                                <div class="form-icon position-relative">
-                                                    <select name="agent" id=""  class="form-control ps-4"> 
-                                                        <option   class="form-control ps-4">Select Agent</option>
-                                                        @foreach ($user as $user_agent )
-                                                            <option value="{{ $user_agent->id }}" class="form-control ps-4">{{ Str::ucfirst($user_agent->firstname)  }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>  
-                                            @error('agent')
-                                            <span class="alert-danger">{{ $message }}</span>
-                                            @enderror                                                                             
-                                        </div><!--end col-->
+                                                @foreach ($ticket->assignedAgent as $agentselected )
+                                                @endforeach
+                                                @if (!empty($agentselected))
+                                                <label class="form-label">Agent <span class="text-danger">{{ $agentselected->firstname }} </span> Assigned</label>
+                                                @else
+                                                    <label class="form-label">Agent Available<span class="text-danger">*</span></label>
+                                                    <div class="form-icon position-relative">
+                                                        <select name="agent" id=""  class="form-control ps-4"> 
+                                                            <option   class="form-control ps-4">Select Agent</option>
+                                                            @foreach ($user as $user_agent ) 
+                                                                <option value="{{ $user_agent->id }}"   class="form-control ps-4"> {{    Str::ucfirst($user_agent->firstname)  }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>  
+                                                    @error('agent')
+                                                    <span class="alert-danger">{{ $message }}</span>
+                                                    @enderror    
+                                                @endif                                                                         
+                                           </div><!--end col-->
                                             <div class="col-lg-12 mt-2 mb-0">
                                                 <a class="btn btn-primary"  href="{{ url('user') }}">Back</a>
+                                                @if (!empty($agentselected))
+                                                @else
                                                 <input type="submit" id="submit" name="send" class="btn btn-primary" value="Assign Agent">
+                                                @endif
                                             </div><!--end col-->
                                         </div><!--end row-->
                                     </form>

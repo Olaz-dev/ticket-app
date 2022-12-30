@@ -11,7 +11,10 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\EditTicketRequest;
 use App\Notifications\TicketNotification;
 use App\Http\Requests\CreateTicketRequest;
+use App\Models\ticketassigned_user;
+use App\Notifications\TicketAssignedNotification;
 use Illuminate\Support\Facades\Notification;
+use TicketAssignedUser;
 
 //use Illuminate\Notifications\Notification;
 
@@ -20,8 +23,8 @@ class TicketController extends Controller
     public function index()
     {
         $tickets = Ticket::all();
-        
-        return view ('admin.ticket.index',compact('tickets'));
+        $ticket_assigned = ticketassigned_user::all();
+        return view ('admin.ticket.index',compact('tickets','ticket_assigned'));
         
     }
     public function create()
@@ -52,9 +55,14 @@ class TicketController extends Controller
 
     public function update(EditTicketRequest $request, Ticket $ticket)
     {
-       //$ticket->Update($request->validated());
-       $agent_id = $request->input('agent');
-       $ticket->assignedAgent()->attach($agent_id);
+        $user = User::where('role_as', '1')->get();
+        $agent_id = $request->input('agent');
+        $user_agent = User::where('id',$agent_id)->get();
+        $ticket->Update($request->validated('status'));
+        $ticket->assignedAgent()->attach($agent_id);
+     
+       Notification::send($user_agent, new TicketAssignedNotification($ticket));
+       Notification::send($user, new TicketNotification($ticket));
        return redirect()->route('ticket.index');
     }
 

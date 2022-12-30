@@ -24,7 +24,7 @@ class EditTicketRequest extends FormRequest
     public function rules()
     {
         return [
-          //  "agent"=>['required']
+           "status"=>['required','string']
         ];
     }
 }
