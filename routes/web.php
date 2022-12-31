@@ -35,17 +35,21 @@ Route::get('dashboard', [HomeController::class,'index']);
 Route::resource('ticket',TicketController::class);
  Route::resource('user', UsersController::class);
  Route::resource('assigned',AssignedTicketController::class);
+ Route::resource('category',CategoryController::class);
+Route::resource('label',LabelController::class);
+Route::resource('priority', PriorityController::class);
  });
 
 Route::group(['middleware'=>['auth','isAgent']], function(){
-
+//Route::resource('ticket',TicketController::class)->only('show');
+Route::resource('assigned',AssignedTicketController::class);
 });
 Route::group(['middleware'=>['auth']], function(){
 
 Route::resource('ticket',TicketController::class)->only(['create','store']);
 });
 
-Route::get('/signup',[SignupController::class,'index'])->middleware('auth');
+Route::get('/signup',[SignupController::class,'index']);
 Route::post('/signup',[SignupController::class,'save']);
 
 
@@ -60,8 +64,6 @@ Route::group(['prefix' => 'notifications', 'as' => 'notifications.','middleware'
         Route::delete('/destroy', [\App\Http\Controllers\AgentNotificationController::class, 'destroy'])->name('destroy');
     });
 
-Route::resource('category',CategoryController::class);
-Route::resource('label',LabelController::class);
-Route::resource('priority', PriorityController::class);
+
 
 //Route::resource('ticket',TicketController::class)->only(['create','store']);
